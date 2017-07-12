@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Grid, Row, Col } from 'react-bootstrap';
+import 'whatwg-fetch';
 
 export default class Counter extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class Counter extends Component {
   }
 
   checkCount() {
-    fetch(`http://localhost/counter/#{this.props.id}`)
+    fetch(`http://localhost/counter/${this.props.id}`, { mode: 'cors' })
       .then((res) => {
         return res.json();
       }).then((obj) => {
@@ -23,14 +24,14 @@ export default class Counter extends Component {
   }
 
   increment() {
-    fetch(`http://localhost/counter/#{this.props.id}/increment`)
+    fetch(`http://localhost/counter/${this.props.id}/increment`, { mode: 'cors' })
       .then((res) => {
         this.checkCount();
       });
   }
 
   decrement() {
-    fetch(`http://localhost/counter/#{this.props.id}/decrement`)
+    fetch(`http://localhost/counter/${this.props.id}/decrement`, { mode: 'cors' })
       .then((res) => {
         this.checkCount();
       });

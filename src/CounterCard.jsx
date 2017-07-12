@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import 'whatwg-fetch';
 
 import Counter from './Counter';
 
@@ -7,21 +8,22 @@ export default class CounterCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ids: [1, 2]
+      ids: []
     };
   }
 
   componentDidMount() {
-    fetch("http://localhost/counter")
+    fetch("http://localhost/counter", { mode: 'cors' })
       .then((res) => {
         return res.json();
-      }).then((obj) => {
+      })
+      .then((obj) => {
         this.setState({ ids: obj.ids });
       });
   }
 
   newCounter() {
-    fetch("http://localhost/counter/new")
+    fetch("http://localhost/counter/new", { mode: 'cors' })
       .then((res) => {
         return res.json();
       }).then((obj) => {
